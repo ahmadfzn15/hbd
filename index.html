@@ -4,20 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/tailwind.js"></script>
+    <script src="assets/gsap.min.js"></script>
+    <script
+      src="assets/jquery.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
     <style>
       .bg-img {
-        background-image: url("assets/hbd.jpg");
-        background-size: cover;
+        background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.9),
+            rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0.9)
+          ),
+          url("assets/img.jfif");
         background-position: 50% 50%;
         background-attachment: fixed;
+        animation: bg 3s infinite alternate;
+      }
+
+      .shadow-in {
+        box-shadow: inset 10px 0 30px rgba(255, 255, 255, 0.3),
+          inset -10px 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      .shadow-out {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      }
+
+      @keyframes bg {
+        0% {
+          background-size: 120%;
+        }
+        100% {
+          background-size: 135%;
+        }
       }
     </style>
   </head>
-  <body class="bg-img">
-    <h1>Hello Guys</h1>
-    <audio autoplay>
-      <source src="assets/hbd.mp3" type="audio/mpeg" />
-    </audio>
+  <body class="w-screen h-screen bg-black overflow-hidden">
+    <div
+      class="bg-img w-full h-full flex justify-center items-center shadow-in"
+      id="background"
+    >
+      <div
+        class="max-w-[calc(100vw-10rem)] w-full rounded-3xl mx-auto opacity-0 mt-80 border shadow-out bg-black/50 backdrop-blur-xl text-slate-300 flex flex-col items-center gap-10 p-10"
+        id="dialog"
+      >
+        <img src="assets/pentol.gif" class="w-[70%]" />
+        <h1 class="text-6xl">Hey Kamu 😁❤</h1>
+      </div>
+    </div>
   </body>
+  <script>
+    gsap.from("#background", {
+      y: 300,
+      duration: 1,
+      opacity: 0,
+    });
+
+    setTimeout(() => {
+      gsap.to("#dialog", {
+        y: -80,
+        opacity: 1,
+        duration: 1,
+      });
+    }, 800);
+  </script>
 </html>
